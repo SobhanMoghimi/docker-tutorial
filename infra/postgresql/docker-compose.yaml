@@ -1,0 +1,26 @@
+services:
+  db:
+    container_name: postgres
+    image: postgres:15.3-alpine
+    restart: always
+    env_file:
+      - path: ./variables.env
+        required: true
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+    networks:
+      - postgres-net
+    ports:
+      - "5432:5432"
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  postgres-net:
+    name:
+      postgres-net
