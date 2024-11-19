@@ -1,0 +1,30 @@
+services:
+  sample-app:
+    container_name: sample-app
+    env_file:
+      - path: ./.env
+        required: true
+    image: ${IMAGE_NAME}
+    command: sh -c "python3 -m manage migrate && python3 -m manage runserver 0.0.0.0:8100"
+    networks:
+      - sample-app-network
+      - redis-net
+    volumes:
+      - static:/static/
+    restart: always
+    ports:
+      - "8100:8100"
+
+
+volumes:
+  static:
+  redis_data:
+    driver: local
+
+networks:
+  sample-app-network:
+  redis-net:
+    name: redis-net
+    external: true
+  postgres_default:
+    external: true
