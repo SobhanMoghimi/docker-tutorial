@@ -9,7 +9,7 @@ services:
     command: sh -c "python3 -m manage migrate && python3 -m manage runserver 0.0.0.0:8100"
     networks:
       - sample-app-network
-      - postgres_default
+      - postgres-net
     volumes:
       - static:/static/
     restart: always
@@ -24,5 +24,6 @@ volumes:
 
 networks:
   sample-app-network:
-  postgres_default:
+  postgres-net:
     external: true
+    name: postgres-net
