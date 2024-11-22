@@ -17,6 +17,6 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip3  install --no-cache-dir -r ./requirements.txt
 
-COPY sample_app ./sample_app
+COPY sample_app/ .
 
 EXPOSE 8100
